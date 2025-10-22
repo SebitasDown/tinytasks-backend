@@ -1,6 +1,7 @@
 package com.tinyapp.tinytasks_backend.service;
 
 import com.tinyapp.tinytasks_backend.model.Tareas;
+import com.tinyapp.tinytasks_backend.repository.TareasRepository;
 import org.springframework.stereotype.Service;
 
 
@@ -11,18 +12,30 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class TareasService {
-    // Lista de tareas
-    private final List<Tareas> tareas = new ArrayList<>();
-    // Este se utiliza para generar el id
-    private final AtomicLong contador = new AtomicLong(1);
+
+    private final TareasRepository tareaRepository;
+    public TareasService (TareasRepository tareaRepository){
+        this.tareaRepository = tareaRepository;
+    }
+
+
+    // Metodo para agregar
+    public Tareas agregarTarea(Tareas tarea){
+        // Tarea por defecto como no hecha
+        tarea.setDone(false);
+
+        if(tarea.getTitle() == null || tarea.getTitle().isEmpty()){
+            throw new IllegalArgumentException("Error, No puede estar vacio el titulo");
+        }
+        return tareaRepository.agregar(tarea);
+    }
 
     // Metodo GET (Listar todas las tareas)
     public List<Tareas> listar() {
-        if(tareas.isEmpty()){
-            System.out.println("No hay tareas registradas");
-        }
-        return tareas;
+      return tareaRepository.obtenerTodas() ;
     }
+
+
 
 
 }
