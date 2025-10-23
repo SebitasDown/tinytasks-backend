@@ -35,6 +35,23 @@ public class TareasService {
       return tareaRepository.obtenerTodas() ;
     }
 
+    // Actualizar tarea (boolean done)
+    public Tareas actualizar(int id,boolean done){
+        Tareas tareaActualizada = tareaRepository.actualizarTarea(id, done);
+        if(tareaActualizada == null){
+            throw new IllegalArgumentException("No se encontro la tarea");
+        }
+        return tareaActualizada;
+    }
+
+    // Metodo para eliminar una tarea
+    public Tareas eliminarTarea (int id){
+        Tareas eliminada = tareaRepository.eliminarTarea(id);
+        if(eliminada == null){
+            throw new IllegalArgumentException("No se encontro la tarea");
+        }
+        return eliminada;
+    }
 
 
 

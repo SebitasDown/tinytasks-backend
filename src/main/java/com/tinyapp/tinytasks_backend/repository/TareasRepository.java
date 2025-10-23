@@ -24,4 +24,39 @@ public class TareasRepository {
         return listadeTareas;
     }
 
+
+    // Metodo para buscar el Id
+    public Tareas buscarporId (int id){
+        for (Tareas tarea : listadeTareas){
+            if(tarea.getId() == id){
+                return tarea;
+            }
+        }
+        System.out.println("No se encontro la tarea");
+        return null;
+
+    }
+
+    // Actualizar el estado donde a true
+    public Tareas actualizarTarea (int id, boolean done){
+
+        Tareas tarea = buscarporId(id);
+        if(tarea != null){
+            tarea.setDone(true);
+            return tarea;
+        }
+        return null;
+
+    }
+
+    // Eliminar tarea en especifico
+    public Tareas eliminarTarea (int id){
+        Tareas tarea = buscarporId(id);
+        if(tarea !=null){
+            listadeTareas.remove(tarea);
+            return tarea;
+        }
+        return null;
+    }
+
 }
