@@ -42,7 +42,7 @@ public class TareasRepository {
 
         Tareas tarea = buscarporId(id);
         if(tarea != null){
-            tarea.setDone(true);
+            tarea.setDone(done);
             return tarea;
         }
         return null;
